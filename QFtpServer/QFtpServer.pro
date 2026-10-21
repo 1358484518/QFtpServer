@@ -47,7 +47,9 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 DISTFILES +=
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../QFtpServerLib/release/ -lQFtpServerLib
+# MinGW writes the import library next to the lib project. MSVC uses debug/release subdirs.
+win32-g++: LIBS += -L$$OUT_PWD/../QFtpServerLib/ -lQFtpServerLib
+else:win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../QFtpServerLib/release/ -lQFtpServerLib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../QFtpServerLib/debug/ -lQFtpServerLib
 else:unix: LIBS += -L$$OUT_PWD/../QFtpServerLib/ -lQFtpServerLib
 
